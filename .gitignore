@@ -1,8 +1,4 @@
-
 .vs/
-
-obj/Debug/net6.0/
-
+.vscode/
 obj/
-
-bin/Debug/net6.0/
+bin/
