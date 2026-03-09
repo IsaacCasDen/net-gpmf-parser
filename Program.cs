@@ -142,7 +142,7 @@ namespace Cromatix.MP4Reader
             string name = Path.GetFileNameWithoutExtension(Environment.GetCommandLineArgs()[0]);
             Console.WriteLine($"Usage: {name}.exe [args]");
             foreach (var kvp in ArgumentHelper)
-                Console.WriteLine($"{kvp.Key}\t{kvp.Value.help}{(kvp.Value.required ? " [Required]" : "")}");
+                Console.WriteLine($"{kvp.Key}\t{kvp.Value.help}{(kvp.Value.required ? " [Required]" : "[Optional]")}");
         }
     }
 }
