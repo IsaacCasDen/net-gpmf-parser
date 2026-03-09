@@ -66,12 +66,17 @@ namespace Cromatix.MP4Reader
 
             foreach (var klv in telemetry.KLVs)
             {
-                sb.AppendLine(@$"<trkpt lat=""{klv.Lat}"" lon=""{klv.Lon}"">
-                                    <ele>{klv.Alt}</ele>
-                                    <time>{klv.Time.Value.ToString("yyyy-MM-ddTHH:mm:ss:fffZ")}</time>
-                                    <fix>{klv.GPSFix}</fix>
-                                    <hdop>{klv.HDOP}</hdop>
-                                 </trkpt>");
+                var trkpt =
+                    $"<ele>{klv.Alt}</ele>" +
+                    $"<fix>{klv.GPSFix}</fix>" +
+                    $"<hdop>{klv.HDOP}</hdop>" +
+                    $"<speed>{klv.VirtualSpeed}</speed>" +
+                    $"<cmt>ground_speed: {klv.GroundSpeed}</cmt>";
+
+                if (klv.Time.HasValue)
+                    trkpt += $"<time>{klv.Time.Value.ToString("yyyy-MM-ddTHH:mm:ss:fffZ")}</time>";
+
+                sb.AppendLine(@$"<trkpt lat=""{klv.Lat}"" lon=""{klv.Lon}"">{trkpt}</trkpt>");
             }
 
             return sb.ToString();
